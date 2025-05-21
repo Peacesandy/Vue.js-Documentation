@@ -1,0 +1,45 @@
+/* Custom styles for the custom tagline */
+
+/* Style for the custom tagline container */
+.hero-tagline-highlight {
+	font-size: 3.5rem; /* Increased from 2.5rem */
+	font-weight: bold;
+	margin-bottom: 1.5rem;
+	text-align: center;
+	line-height: 1.2;
+}
+
+/* Green color for the word "Progressive" */
+.hero-tagline-highlight .green {
+	color: #42b883; /* Vue.js green */
+}
+
+.hero-actions button.variant-minimal {
+	background-color: transparent;
+	color: #42b883;
+	border: 2px solid #42b883;
+}
+
+/* src/content/docs/styles/custom.css */
+
+.hero-actions a {
+	font-size: 1.8rem !important;
+	font-weight: 700 !important;
+	padding: 1rem 2rem !important;
+	background-color: #42b883 !important; /* Vue green */
+	color: white !important;
+	border-radius: 0.5rem !important;
+	text-decoration: none !important;
+	display: inline-block !important;
+	transition: background-color 0.3s ease;
+}
+
+.hero-actions a:hover {
+	background-color: #369f6f !important; /* Slightly darker on hover */
+}
+
+.hero-actions a.variant-minimal {
+	background-color: transparent !important;
+	color: #42b883 !important;
+	border: 2px solid #42b883 !important;
+}
