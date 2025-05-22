@@ -247,7 +247,7 @@ To ensure consistent access to the proxy, calling reactive() on the same object 
 
 js
 // calling reactive() on the same object returns the same proxy
-console.log(reactive(raw) === proxy) // true
+console.log(reactive(raw) === proxy)
 
 // calling reactive() on a proxy returns itself
 console.log(reactive(proxy) === proxy) // true
