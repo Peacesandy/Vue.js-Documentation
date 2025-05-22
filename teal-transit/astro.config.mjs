@@ -23,8 +23,12 @@ export default defineConfig({
 					],
 				},
 				{
-					label: 'Reference',
+					label: 'Essentials',
 					autogenerate: { directory: 'reference' },
+				},
+				{
+					label: 'Components In-Depth',
+					autogenerate: { directory: 'components' },
 				},
 			],
 		}),
