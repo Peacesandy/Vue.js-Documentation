@@ -216,141 +216,196 @@ async function increment() {
 
 There is another way to declare reactive state, with the reactive() API. Unlike a ref which wraps the inner value in a special object, reactive() makes an object itself reactive:
 
-js
-import { reactive } from 'vue'
+```js
+import { reactive } from "vue";
 
-const state = reactive({ count: 0 })
+const state = reactive({ count: 0 });
+```
+
 See also: Typing Reactive
 
 Usage in template:
 
 template
+
+```js
 <button @click="state.count++">
 {{ state.count }}
 </button>
+```
+
 Reactive objects are JavaScript Proxies and behave just like normal objects. The difference is that Vue is able to intercept the access and mutation of all properties of a reactive object for reactivity tracking and triggering.
 
 reactive() converts the object deeply: nested objects are also wrapped with reactive() when accessed. It is also called by ref() internally when the ref value is an object. Similar to shallow refs, there is also the shallowReactive() API for opting-out of deep reactivity.
 
-Reactive Proxy vs. Original​
+### Reactive Proxy vs. Original​
+
 It is important to note that the returned value from reactive() is a Proxy of the original object, which is not equal to the original object:
 
-js
-const raw = {}
-const proxy = reactive(raw)
+```js
+const raw = {};
+const proxy = reactive(raw);
 
 // proxy is NOT equal to the original.
-console.log(proxy === raw) // false
+console.log(proxy === raw); // false
+```
+
 Only the proxy is reactive - mutating the original object will not trigger updates. Therefore, the best practice when working with Vue's reactivity system is to exclusively use the proxied versions of your state.
 
 To ensure consistent access to the proxy, calling reactive() on the same object always returns the same proxy, and calling reactive() on an existing proxy also returns that same proxy:
 
-js
+```js
 // calling reactive() on the same object returns the same proxy
-console.log(reactive(raw) === proxy)
+console.log(reactive(raw) === proxy);
 
 // calling reactive() on a proxy returns itself
-console.log(reactive(proxy) === proxy) // true
+console.log(reactive(proxy) === proxy); // true
+```
+
 This rule applies to nested objects as well. Due to deep reactivity, nested objects inside a reactive object are also proxies:
 
-js
-const proxy = reactive({})
+```js
+const proxy = reactive({});
 
-const raw = {}
-proxy.nested = raw
+const raw = {};
+proxy.nested = raw;
 
-console.log(proxy.nested === raw) // false
-Limitations of reactive()​
+console.log(proxy.nested === raw); // false
+```
+
+### Limitations of reactive()​
+
 The reactive() API has a few limitations:
 
-Limited value types: it only works for object types (objects, arrays, and collection types such as Map and Set). It cannot hold primitive types such as string, number or boolean.
+1. Limited value types: it only works for object types (objects, arrays, and collection types such as Map and Set). It cannot hold primitive types such as string, number or boolean.
 
-Cannot replace entire object: since Vue's reactivity tracking works over property access, we must always keep the same reference to the reactive object. This means we can't easily "replace" a reactive object because the reactivity connection to the first reference is lost:
+2. Cannot replace entire object: since Vue's reactivity tracking works over property access, we must always keep the same reference to the reactive object. This means we can't easily "replace" a reactive object because the reactivity connection to the first reference is lost:
 
-js
-let state = reactive({ count: 0 })
+```js
+let state = reactive({ count: 0 });
 
 // the above reference ({ count: 0 }) is no longer being tracked
 // (reactivity connection is lost!)
-state = reactive({ count: 1 })
-Not destructure-friendly: when we destructure a reactive object's primitive type property into local variables, or when we pass that property into a function, we will lose the reactivity connection:
+state = reactive({ count: 1 });
+```
 
-js
-const state = reactive({ count: 0 })
+3. Not destructure-friendly: when we destructure a reactive object's primitive type property into local variables, or when we pass that property into a function, we will lose the reactivity connection:
+
+```js
+const state = reactive({ count: 0 });
 
 // count is disconnected from state.count when destructured.
-let { count } = state
+let { count } = state;
 // does not affect original state
-count++
+count++;
 
 // the function receives a plain number and
 // won't be able to track changes to state.count
 // we have to pass the entire object in to retain reactivity
-callSomeFunction(state.count)
+callSomeFunction(state.count);
+```
+
 Due to these limitations, we recommend using ref() as the primary API for declaring reactive state.
 
-Additional Ref Unwrapping Details​
+## Additional Ref Unwrapping Details​
+
+---
+
 As Reactive Object Property​
 A ref is automatically unwrapped when accessed or mutated as a property of a reactive object. In other words, it behaves like a normal property:
 
-js
-const count = ref(0)
+```js
+const count = ref(0);
 const state = reactive({
-count
-})
+	count,
+});
 
-console.log(state.count) // 0
+console.log(state.count); // 0
 
-state.count = 1
-console.log(count.value) // 1
+state.count = 1;
+console.log(count.value); // 1
+```
+
 If a new ref is assigned to a property linked to an existing ref, it will replace the old ref:
 
-js
-const otherCount = ref(2)
+```js
+const otherCount = ref(2);
 
-state.count = otherCount
-console.log(state.count) // 2
+state.count = otherCount;
+console.log(state.count); // 2
 // original ref is now disconnected from state.count
-console.log(count.value) // 1
+console.log(count.value); // 1
+```
+
 Ref unwrapping only happens when nested inside a deep reactive object. It does not apply when it is accessed as a property of a shallow reactive object.
 
-Caveat in Arrays and Collections​
+## Caveat in Arrays and Collections​
+
 Unlike reactive objects, there is no unwrapping performed when the ref is accessed as an element of a reactive array or a native collection type like Map:
 
-js
-const books = reactive([ref('Vue 3 Guide')])
+```js
+const books = reactive([ref("Vue 3 Guide")]);
 // need .value here
-console.log(books[0].value)
+console.log(books[0].value);
 
-const map = reactive(new Map([['count', ref(0)]]))
+const map = reactive(new Map([["count", ref(0)]]));
 // need .value here
-console.log(map.get('count').value)
-Caveat when Unwrapping in Templates​
+console.log(map.get("count").value);
+```
+
+## Caveat when Unwrapping in Templates​
+
 Ref unwrapping in templates only applies if the ref is a top-level property in the template render context.
 
 In the example below, count and object are top-level properties, but object.id is not:
 
-js
-const count = ref(0)
-const object = { id: ref(1) }
+```js
+const count = ref(0);
+const object = { id: ref(1) };
+```
+
 Therefore, this expression works as expected:
 
-template
-{{ count + 1 }}
+```js
+{
+	{
+		count + 1;
+	}
+}
+```
+
 ...while this one does NOT:
 
-template
-{{ object.id + 1 }}
+```js
+{
+	{
+		object.id + 1;
+	}
+}
+```
+
 The rendered result will be [object Object]1 because object.id is not unwrapped when evaluating the expression and remains a ref object. To fix this, we can destructure id into a top-level property:
 
-js
-const { id } = object
-template
-{{ id + 1 }}
+```js
+const { id } = object;
+template;
+{
+	{
+		id + 1;
+	}
+}
+```
+
 Now the render result will be 2.
 
 Another thing to note is that a ref does get unwrapped if it is the final evaluated value of a text interpolation (i.e. a {{ }} tag), so the following will render 1:
 
-template
-{{ object.id }}
+```js
+{
+	{
+		object.id;
+	}
+}
+```
+
 This is just a convenience feature of text interpolation and is equivalent to {{ object.id.value }}.
