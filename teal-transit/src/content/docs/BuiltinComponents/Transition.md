@@ -211,3 +211,297 @@ leave-active-class="animate**animated animate**bounceOutRight"
 ```
 
 Try it in the Playground
+
+### Using Transitions and Animations Together​
+
+Vue needs to attach event listeners in order to know when a transition has ended. It can either be transitionend or animationend, depending on the type of CSS rules applied. If you are only using one or the other, Vue can automatically detect the correct type.
+
+However, in some cases you may want to have both on the same element, for example having a CSS animation triggered by Vue, along with a CSS transition effect on hover. In these cases, you will have to explicitly declare the type you want Vue to care about by passing the type prop, with a value of either animation or transition:
+
+```js
+<Transition type='animation'>...</Transition>
+```
+
+### Nested Transitions and Explicit Transition Durations​
+
+Although the transition classes are only applied to the direct child element in <Transition>, we can transition nested elements using nested CSS selectors:
+
+```js
+<Transition name='nested'>
+	<div v-if='show' class='outer'>
+		<div class='inner'>Hello</div>
+	</div>
+</Transition>
+```
+
+```js
+/* rules that target nested elements */
+.nested-enter-active .inner,
+.nested-leave-active .inner {
+  transition: all 0.3s ease-in-out;
+}
+
+.nested-enter-from .inner,
+.nested-leave-to .inner {
+  transform: translateX(30px);
+  opacity: 0;
+}
+
+/* ... other necessary CSS omitted */
+```
+
+We can even add a transition delay to the nested element on enter, which creates a staggered enter animation sequence:
+
+```js
+/* delay enter of nested element for staggered effect */
+.nested-enter-active .inner {
+  transition-delay: 0.25s;
+}
+```
+
+However, this creates a small issue. By default, the `<Transition>` component attempts to automatically figure out when the transition has finished by listening to the first transitionend or animationend event on the root transition element. With a nested transition, the desired behavior should be waiting until the transitions of all inner elements have finished.
+
+In such cases you can specify an explicit transition duration (in milliseconds) using the duration prop on the `<Transition>` component. The total duration should match the delay plus transition duration of the inner element:
+
+```js
+<Transition :duration="550">...</Transition>
+```
+
+Hello
+Try it in the Playground
+
+If necessary, you can also specify separate values for enter and leave durations using an object:
+
+```js
+<Transition :duration="{ enter: 500, leave: 800 }">...</Transition>
+```
+
+### Performance Considerations​
+
+You may notice that the animations shown above are mostly using properties like transform and opacity. These properties are efficient to animate because:
+
+1. They do not affect the document layout during the animation, so they do not trigger expensive CSS layout calculation on every animation frame.
+
+2. Most modern browsers can leverage GPU hardware acceleration when animating transform.
+
+In comparison, properties like height or margin will trigger CSS layout, so they are much more expensive to animate, and should be used with caution.
+
+---
+
+## JavaScript Hooks​
+
+You can hook into the transition process with JavaScript by listening to events on the `<Transition>` component:
+
+```js
+<Transition
+  @before-enter="onBeforeEnter"
+  @enter="onEnter"
+  @after-enter="onAfterEnter"
+  @enter-cancelled="onEnterCancelled"
+  @before-leave="onBeforeLeave"
+  @leave="onLeave"
+  @after-leave="onAfterLeave"
+  @leave-cancelled="onLeaveCancelled"
+>
+  <!-- ... -->
+</Transition>
+```
+
+```js
+// called before the element is inserted into the DOM.
+// use this to set the "enter-from" state of the element
+function onBeforeEnter(el) {}
+
+// called one frame after the element is inserted.
+// use this to start the entering animation.
+function onEnter(el, done) {
+	// call the done callback to indicate transition end
+	// optional if used in combination with CSS
+	done();
+}
+
+// called when the enter transition has finished.
+function onAfterEnter(el) {}
+
+// called when the enter transition is cancelled before completion.
+function onEnterCancelled(el) {}
+
+// called before the leave hook.
+// Most of the time, you should just use the leave hook
+function onBeforeLeave(el) {}
+
+// called when the leave transition starts.
+// use this to start the leaving animation.
+function onLeave(el, done) {
+	// call the done callback to indicate transition end
+	// optional if used in combination with CSS
+	done();
+}
+
+// called when the leave transition has finished and the
+// element has been removed from the DOM.
+function onAfterLeave(el) {}
+
+// only available with v-show transitions
+function onLeaveCancelled(el) {}
+```
+
+These hooks can be used in combination with CSS transitions / animations or on their own.
+
+When using JavaScript-only transitions, it is usually a good idea to add the :css="false" prop. This explicitly tells Vue to skip auto CSS transition detection. Aside from being slightly more performant, this also prevents CSS rules from accidentally interfering with the transition:
+
+These hooks can be used in combination with CSS transitions / animations or on their own.
+
+When using JavaScript-only transitions, it is usually a good idea to add the :css="false" prop. This explicitly tells Vue to skip auto CSS transition detection. Aside from being slightly more performant, this also prevents CSS rules from accidentally interfering with the transition:
+
+```js
+<Transition
+  ...
+  :css="false"
+>
+  ...
+</Transition>
+```
+
+With `:css="false"`, we are also fully responsible for controlling when the transition ends. In this case, the done callbacks are required for the @enter and @leave hooks. Otherwise, the hooks will be called synchronously and the transition will finish immediately.
+
+Here's a demo using the GSAP library to perform the animations. You can, of course, use any other animation library you want, for example Anime.js or Motion One:
+
+---
+
+## Reusable Transitions​
+
+Transitions can be reused through Vue's component system. To create a reusable transition, we can create a component that wraps the <Transition> component and passes down the slot content:
+
+```js
+<!-- MyTransition.vue -->
+<script>
+// JavaScript hooks logic...
+</script>
+
+  <!-- wrap the built-in Transition component -->
+  <Transition
+    name="my-transition"
+    @enter="onEnter"
+    @leave="onLeave">
+    <slot></slot> <!-- pass down slot content -->
+  </Transition>
+
+<style>
+/*
+  Necessary CSS...
+  Note: avoid using <style scoped> here since it
+  does not apply to slot content.
+*/
+</style>
+```
+
+Now MyTransition can be imported and used just like the built-in version:
+
+```js
+<MyTransition>
+	<div v-if='show'>Hello</div>
+</MyTransition>
+```
+
+---
+
+## Transition on Appear​
+
+If you also want to apply a transition on the initial render of a node, you can add the appear prop:
+
+```js
+<Transition appear>...</Transition>
+```
+
+---
+
+## Transition Between Elements​
+
+In addition to toggling an element with v-if / v-show, we can also transition between two elements using v-if / v-else / v-else-if, as long as we make sure that there is only one element being shown at any given moment:
+
+```js
+<Transition>
+	<button v-if="docState === 'saved'">Edit</button>
+	<button v-else-if="docState === 'edited'">Save</button>
+	<button v-else-if="docState === 'editing'">Cancel</button>
+</Transition>
+```
+
+---
+
+## Transition Modes​
+
+In the previous example, the entering and leaving elements are animated at the same time, and we had to make them position: absolute to avoid the layout issue when both elements are present in the DOM.
+
+However, in some cases this isn't an option, or simply isn't the desired behavior. We may want the leaving element to be animated out first, and for the entering element to only be inserted after the leaving animation has finished. Orchestrating such animations manually would be very complicated - luckily, we can enable this behavior by passing `<Transition>` a mode prop:
+
+```js
+<Transition mode='out-in'>...</Transition>
+```
+
+Here's the previous demo with mode="out-in":
+
+Click to cycle through states:
+
+Edit
+`<Transition>` also supports mode="in-out", although it's much less frequently used.
+
+---
+
+## Transition Between Components​
+
+`<Transition>` can also be used around dynamic components:
+
+```js
+<Transition name="fade" mode="out-in">
+  <component :is="activeComponent"></component>
+</Transition>
+```
+
+A B
+Component A
+Try it in the Playground
+
+---
+
+## Dynamic Transitions​
+
+`<Transition>` props like name can also be dynamic! It allows us to dynamically apply different transitions based on state change:
+
+```js
+<Transition :name="transitionName">
+  <!-- ... -->
+</Transition>
+```
+
+This can be useful when you've defined CSS transitions / animations using Vue's transition class conventions and want to switch between them.
+
+You can also apply different behavior in JavaScript transition hooks based on the current state of your component. Finally, the ultimate way of creating dynamic transitions is through reusable transition components that accept props to change the nature of the transition(s) to be used. It may sound cheesy, but the only limit really is your imagination.
+
+---
+
+## Transitions with the Key Attribute​
+
+Sometimes you need to force the re-render of a DOM element in order for a transition to occur.
+
+Take this counter component for example:
+
+```js
+<script setup>
+import { ref } from 'vue';
+const count = ref(0);
+
+setInterval(() => count.value++, 1000);
+</script>
+
+<template>
+  <Transition>
+    <span :key="count">{{ count }}</span>
+  </Transition>
+</template>
+```
+
+If we had excluded the key attribute, only the text node would be updated and thus no transition would occur. However, with the key attribute in place, Vue knows to create a new span element whenever count changes and thus the Transition component has 2 different elements to transition between.
+
+Try it in the Playground
