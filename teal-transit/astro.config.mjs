@@ -46,6 +46,10 @@ export default defineConfig({
 					label: 'Best Practices',
 					autogenerate: { directory: 'BestPractices' },
 				},
+				{
+					label: 'TypeScript',
+					autogenerate: { directory: 'Type-script' },
+				},
 			],
 		}),
 	],
