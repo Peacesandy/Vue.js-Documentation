@@ -3,8 +3,6 @@ title: Render Functions & JSX
 description: A reference page in my new Starlight docs site.
 ---
 
----
-
 Vue recommends using templates to build applications in the vast majority of cases. However, there are situations where we need the full programmatic power of JavaScript. That's where we can use the render function.
 
 > If you are new to the concept of virtual DOM and render functions, make sure to read the Rendering Mechanism chapter first.

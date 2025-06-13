@@ -3,8 +3,6 @@ title: Composition API FAQ
 description: A reference page in my new Starlight docs site.
 ---
 
----
-
 :::tip
 This FAQ assumes prior experience with Vue - in particular, experience with Vue 2 while primarily using Options API.
 :::

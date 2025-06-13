@@ -3,8 +3,6 @@ title: Reactivity in Depth​
 description: A reference page in my new Starlight docs site.
 ---
 
----
-
 One of Vue’s most distinctive features is the unobtrusive reactivity system. Component state consists of reactive JavaScript objects. When you modify them, the view updates. It makes state management simple and intuitive, but it’s also important to understand how it works to avoid some common gotchas. In this section, we are going to dig into some of the lower-level details of Vue’s reactivity system.
 
 ## What is Reactivity?​

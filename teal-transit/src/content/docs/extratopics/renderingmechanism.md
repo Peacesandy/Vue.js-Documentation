@@ -3,8 +3,6 @@ title: Rendering Mechanism
 description: A reference page in my new Starlight docs site.
 ---
 
----
-
 How does Vue take a template and turn it into actual DOM nodes? How does Vue update those DOM nodes efficiently? We will attempt to shed some light on these questions here by diving into Vue's internal rendering mechanism.
 
 ---
