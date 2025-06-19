@@ -7,6 +7,9 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Vue.js',
+			customCss: [
+				'./src/content/docs/styles/custom.css',
+			],
 			logo: {
 				src: "./public/vue-svgrepo-com.svg", // path relative to the public folder
 				alt: "Your Project Logo", // alt text for accessibility

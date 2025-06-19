@@ -1,0 +1,137 @@
+* {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+/* Dark mode colors. */
+:root {
+	--sl-color-accent-low: #072d00;
+	--sl-color-accent: #247f00;
+	--sl-color-accent-high: #aad7a0;
+	--sl-color-white: #ffffff;
+	--sl-color-gray-1: #eaf0e8;
+	--sl-color-gray-2: #bdc4bb;
+	--sl-color-gray-3: #82907f;
+	--sl-color-gray-4: #4f5c4d;
+	--sl-color-gray-5: #303c2d;
+	--sl-color-gray-6: #1f2a1c;
+	--sl-color-black: #151a13;
+}
+/* Light mode colors. */
+:root[data-theme="light"] {
+	--sl-color-accent-low: #c0e2b8;
+	--sl-color-accent: #237b00;
+	--sl-color-accent-high: #0d3e00;
+	--sl-color-white: #151a13;
+	--sl-color-gray-1: #1f2a1c;
+	--sl-color-gray-2: #303c2d;
+	--sl-color-gray-3: #4f5c4d;
+	--sl-color-gray-4: #82907f;
+	--sl-color-gray-5: #bdc4bb;
+	--sl-color-gray-6: #eaf0e8;
+	--sl-color-gray-7: #f4f7f3;
+	--sl-color-black: #ffffff;
+}
+.landing-page {
+	max-width: none !important;
+	margin: 0 !important;
+}
+
+/* Override Starlight's main content styling for landing page */
+.landing-page .sl-container {
+	max-width: none;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+}
+.addcolortext {
+	color: green;
+}
+
+.float {
+	background-color: green;
+	border-radius: 0.5rem;
+	width: 2rem;
+	height: 5rem;
+	font-size: 1.5rem;
+	position: relative;
+	bottom: 1.5rem;
+}
+
+.astro-jbfsktt5 h1 {
+	background: -webkit-linear-gradient(315deg, #42d392 25%, #647eff);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	color: transparent;
+}
+.btn {
+	border-radius: 0.3em;
+	background-color: rgba(1, 135, 0, 0.8);
+	width: 9em;
+	height: 3em;
+}
+.explore {
+	background: -webkit-linear-gradient(315deg, #42d392 25%, #647eff);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	color: transparent;
+	text-align: center;
+}
+/* Custom Directives */
+
+.importanttext {
+	background-color: yellow;
+	color: black;
+}
+
+.sl-card {
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	border: 1px solid #e1e8ed;
+	background-color: red;
+}
+
+.sl-card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 12px 24px rgba(66, 184, 131, 0.15);
+	border-color: var(--vue-green);
+}
+
+/* Custom Button Styles */
+.sl-link-button[data-variant="primary"] {
+	background: linear-gradient(135deg, #42b883 0%, #369870 100%);
+	border: none;
+	transition: all 0.3s ease;
+}
+/* .astro-xwgiixxa{
+  background: linear-gradient(135deg, #42b883 0%, #369870 100%);
+  border: none;
+  transition: all 0.3s ease;
+} */
+.sl-link-astro[data-variant="primary"]:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 16px rgba(66, 184, 131, 0.3);
+}
+
+/* Section Spacing */
+.content-section {
+	margin: 6rem 0;
+}
+
+/* Animation for scroll reveal */
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.animate-on-scroll {
+	animation: fadeInUp 0.6s ease forwards;
+}
+/* CARDS COMPONENTS */

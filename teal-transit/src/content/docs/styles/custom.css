@@ -1,4 +1,93 @@
 /* Custom styles for the custom tagline */
+/* Alternative: Add Vue green accent while keeping visibility */
+* {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+* {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+[data-has-hero] .hero h1 {
+	color: var(--sl-color-gray-1);
+	margin-bottom: 1.5rem;
+	letter-spacing: 0.05em;
+	line-height: 1.1;
+	width: 100%;
+	transform: scaleX(1.1);
+	position: relative;
+}
+
+/* Add green underline accent using theme colors */
+[data-has-hero] .hero h1::after {
+	content: "";
+	position: absolute;
+	bottom: -10px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 200px;
+	height: 4px;
+	background: linear-gradient(
+		90deg,
+		var(--sl-color-accent),
+		var(--sl-color-accent-high)
+	);
+	border-radius: 2px;
+}
+
+/* Light theme adjustments */
+:root[data-theme="light"] [data-has-hero] .hero h1 {
+	color: var(--sl-color-gray-1);
+}
+/* Vue.js themed Getting Started button */
+.hero .sl-link-button:not([data-variant]) {
+	background: linear-gradient(135deg, #42b883 0%, #35495e 100%);
+	border: 2px solid transparent;
+	color: white;
+	font-weight: 600;
+	padding: 12px 24px;
+	border-radius: 6px;
+	position: relative;
+	overflow: hidden;
+	transition: all 0.3s ease;
+}
+
+/* Add a subtle Vue logo pattern */
+.hero .sl-link-button:not([data-variant])::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(255, 255, 255, 0.2),
+		transparent
+	);
+	transition: left 0.5s;
+}
+
+.hero .sl-link-button:not([data-variant]):hover::before {
+	left: 100%;
+}
+
+.hero .sl-link-button:not([data-variant]):hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 25px rgba(66, 184, 131, 0.4);
+	border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Animate the right arrow icon */
+.hero .sl-link-button:not([data-variant]) svg {
+	transition: transform 0.3s ease;
+	margin-left: 4px;
+}
+
+.hero .sl-link-button:not([data-variant]):hover svg {
+	transform: translateX(4px);
+}
 
 /* Style for the custom tagline container */
 .hero-tagline-highlight {
@@ -42,4 +131,160 @@
 	background-color: transparent !important;
 	color: #42b883 !important;
 	border: 2px solid #42b883 !important;
+}
+
+/* src/styles/landing.css */
+
+/* Hero Section */
+.hero-custom {
+	padding: 6rem 2rem;
+	background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+}
+
+.hero-container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 4rem;
+	max-width: 1200px;
+	margin: 0 auto;
+	align-items: center;
+}
+
+.hero-content {
+	text-align: left;
+}
+
+.hero-logo {
+	margin-bottom: 2rem;
+}
+
+.hero-title {
+	font-size: 3.5rem;
+	font-weight: 700;
+	line-height: 1.1;
+	margin-bottom: 1.5rem;
+	color: var(--sl-color-text);
+}
+
+.gradient-text {
+	background: linear-gradient(45deg, var(--vue-green), var(--vue-light-green));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.hero-description {
+	font-size: 1.25rem;
+	color: var(--sl-color-text-secondary);
+	margin-bottom: 2rem;
+	line-height: 1.6;
+}
+
+.hero-actions {
+	display: flex;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
+
+.btn {
+	padding: 0.75rem 1.5rem;
+	border-radius: 8px;
+	text-decoration: none;
+	font-weight: 600;
+	transition: all 0.2s;
+	border: none;
+	cursor: pointer;
+	display: inline-block;
+}
+
+.btn-primary {
+	background: var(--vue-green);
+	color: white;
+}
+
+.btn-primary:hover {
+	background: var(--vue-dark-green);
+	transform: translateY(-2px);
+}
+
+.btn-secondary {
+	background: transparent;
+	color: var(--vue-green);
+	border: 2px solid var(--vue-green);
+}
+
+.btn-secondary:hover {
+	background: var(--vue-green);
+	color: white;
+	transform: translateY(-2px);
+}
+
+.hero-code {
+	background: var(--sl-color-bg-nav);
+	border-radius: 12px;
+	padding: 1rem;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+	border: 1px solid var(--sl-color-gray-5);
+}
+
+.btn-outline {
+	background: transparent;
+	color: var(--vue-green);
+	border: 2px solid var(--vue-green);
+	padding: 0.5rem 1rem;
+	border-radius: 6px;
+	text-decoration: none;
+	font-weight: 500;
+	transition: all 0.2s;
+	display: inline-block;
+}
+
+.btn-outline:hover {
+	background: var(--vue-green);
+	color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.hero-container {
+		grid-template-columns: 1fr;
+		text-align: center;
+	}
+
+	.hero-title {
+		font-size: 2.5rem;
+	}
+
+	.quick-start-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.hero-custom,
+	.features-section,
+	.quick-start-section {
+		padding: 4rem 1rem;
+	}
+}
+
+/* Dark mode support */
+:root[data-theme="dark"] {
+	--vue-green: #4fc08d;
+	--vue-dark-green: #369870;
+	--vue-light-green: #42b883;
+}
+
+[data-theme="dark"] .hero-custom {
+	background: linear-gradient(
+		135deg,
+		var(--sl-color-bg) 0%,
+		var(--sl-color-bg-nav) 100%
+	);
+}
+
+[data-theme="dark"] .quick-start-section {
+	background: linear-gradient(
+		135deg,
+		var(--sl-color-bg-nav) 0%,
+		var(--sl-color-bg) 100%
+	);
 }
