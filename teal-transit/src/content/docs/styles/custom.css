@@ -8,6 +8,33 @@
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+/* GREEN TITLE STYLING - Add this section */
+:root {
+	--sl-color-text-accent: #42b883;
+}
+
+/* Site title color - matches Vue.js green theme */
+.site-title {
+	color: #42b883 !important;
+}
+
+[data-starlight] .site-title {
+	color: #42b883;
+}
+
+.header .site-title a {
+	color: #42b883 !important;
+}
+
+/* For dark mode */
+:root[data-theme="dark"] .site-title {
+	color: #4fc08d !important;
+}
+
+[data-theme="dark"] .header .site-title a {
+	color: #4fc08d !important;
+}
+
 [data-has-hero] .hero h1 {
 	color: var(--sl-color-gray-1);
 	margin-bottom: 1.5rem;
