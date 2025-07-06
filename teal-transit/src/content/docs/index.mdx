@@ -1,9 +1,10 @@
 ---
 title: Vue.js Documentation
 description: The Progressive JavaScript Framework for building user interfaces
-tagline: Build modern web applications with ease and flexibility
 template: splash
 hero:
+  tagline: |
+    An approachable, performant and versatile framework for building web user interfaces.
   image:
     file: ../../assets/vue-svgrepo-com.svg
   actions:
@@ -23,6 +24,23 @@ import { Card, CardGrid } from "@astrojs/starlight/components";
 
 <CardGrid stagger>
 	<Card title='Approchable' icon='pencil'>
+		Edit `src/content/docs/index.mdx` to see this page change.
+	</Card>
+	<Card title='Performant' icon='add-document'>
+		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	</Card>
+	<Card title='Versatile' icon='setting'>
+		Edit your `sidebar` and other config in `astro.config.mjs`.
+	</Card>
+	<Card title='Seamless' icon='open-book'>
+		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+	</Card>
+</CardGrid>
+
+## Explore Our Guides
+
+<CardGrid stagger>
+	<Card title='Approachable' icon='pencil'>
 		Edit `src/content/docs/index.mdx` to see this page change.
 	</Card>
 	<Card title='Performant' icon='add-document'>

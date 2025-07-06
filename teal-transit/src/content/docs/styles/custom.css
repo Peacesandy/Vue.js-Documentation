@@ -1,71 +1,71 @@
-/* Custom styles for the custom tagline */
-/* Alternative: Add Vue green accent while keeping visibility */
 * {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
-* {
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-/* GREEN TITLE STYLING - Add this section */
+/* Dark mode colors. */
 :root {
-	--sl-color-text-accent: #42b883;
+	--sl-color-accent-low: #072d00;
+	--sl-color-accent: #247f00;
+	--sl-color-accent-high: #aad7a0;
+	--sl-color-white: #ffffff;
+	--sl-color-gray-1: #eaf0e8;
+	--sl-color-gray-2: #bdc4bb;
+	--sl-color-gray-3: #82907f;
+	--sl-color-gray-4: #4f5c4d;
+	--sl-color-gray-5: #303c2d;
+	--sl-color-gray-6: #1f2a1c;
+	--sl-color-black: #151a13;
+}
+/* Light mode colors. */
+:root[data-theme="light"] {
+	--sl-color-accent-low: #c0e2b8;
+	--sl-color-accent: #237b00;
+	--sl-color-accent-high: #0d3e00;
+	--sl-color-white: #151a13;
+	--sl-color-gray-1: #1f2a1c;
+	--sl-color-gray-2: #303c2d;
+	--sl-color-gray-3: #4f5c4d;
+	--sl-color-gray-4: #82907f;
+	--sl-color-gray-5: #bdc4bb;
+	--sl-color-gray-6: #eaf0e8;
+	--sl-color-gray-7: #f4f7f3;
+	--sl-color-black: #ffffff;
+}
+.landing-page {
+	max-width: none !important;
+	margin: 0 !important;
 }
 
-/* Site title color - matches Vue.js green theme */
-.site-title {
-	color: #42b883 !important;
+/* Override Starlight's main content styling for landing page */
+.landing-page .sl-container {
+	max-width: none;
+	padding: 0;
 }
 
-[data-starlight] .site-title {
-	color: #42b883;
+a {
+	text-decoration: none;
+}
+.addcolortext {
+	color: green;
 }
 
-.header .site-title a {
-	color: #42b883 !important;
-}
-
-/* For dark mode */
-:root[data-theme="dark"] .site-title {
-	color: #4fc08d !important;
-}
-
-[data-theme="dark"] .header .site-title a {
-	color: #4fc08d !important;
-}
-
-[data-has-hero] .hero h1 {
-	color: var(--sl-color-gray-1);
-	margin-bottom: 1.5rem;
-	letter-spacing: 0.05em;
-	line-height: 1.1;
-	width: 100%;
-	transform: scaleX(1.1);
+.float {
+	background-color: green;
+	border-radius: 0.5rem;
+	width: 2rem;
+	height: 5rem;
+	font-size: 1.5rem;
 	position: relative;
+	bottom: 1.5rem;
 }
 
-/* Add green underline accent using theme colors */
-[data-has-hero] .hero h1::after {
-	content: "";
-	position: absolute;
-	bottom: -10px;
-	left: 50%;
-	transform: translateX(-50%);
-	width: 200px;
-	height: 4px;
-	background: linear-gradient(
-		90deg,
-		var(--sl-color-accent),
-		var(--sl-color-accent-high)
-	);
-	border-radius: 2px;
+.astro-jbfsktt5 h1 {
+	background: -webkit-linear-gradient(315deg, #42d392 25%, #647eff);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	color: transparent;
 }
 
-/* Light theme adjustments */
-:root[data-theme="light"] [data-has-hero] .hero h1 {
-	color: var(--sl-color-gray-1);
-}
 /* Vue.js themed Getting Started button */
 .hero .sl-link-button:not([data-variant]) {
 	background: linear-gradient(135deg, #42b883 0%, #35495e 100%);
@@ -116,202 +116,87 @@
 	transform: translateX(4px);
 }
 
-/* Style for the custom tagline container */
-.hero-tagline-highlight {
-	font-size: 3.5rem; /* Increased from 2.5rem */
-	font-weight: bold;
-	margin-bottom: 1.5rem;
-	text-align: center;
-	line-height: 1.2;
+/* Target the hero image specifically */
+.hero img {
+	max-width: 200px; /* Adjust as needed */
+	max-height: 200px;
+	width: auto;
+	height: auto;
 }
 
-/* Green color for the word "Progressive" */
-.hero-tagline-highlight .green {
-	color: #42b883; /* Vue.js green */
+/* Or use a more specific selector */
+.hero .hero-image img {
+	max-width: 250px;
+	max-height: 250px;
 }
 
-.hero-actions button.variant-minimal {
-	background-color: transparent;
-	color: #42b883;
-	border: 2px solid #42b883;
+/* For responsive sizing */
+.hero img {
+	max-width: min(300px, 50vw);
+	height: auto;
 }
 
-/* src/content/docs/styles/custom.css */
-
-.hero-actions a {
-	font-size: 1.8rem !important;
-	font-weight: 700 !important;
-	padding: 1rem 2rem !important;
-	background-color: #42b883 !important; /* Vue green */
-	color: white !important;
-	border-radius: 0.5rem !important;
-	text-decoration: none !important;
-	display: inline-block !important;
-	transition: background-color 0.3s ease;
-}
-
-.hero-actions a:hover {
-	background-color: #369f6f !important; /* Slightly darker on hover */
-}
-
-.hero-actions a.variant-minimal {
-	background-color: transparent !important;
-	color: #42b883 !important;
-	border: 2px solid #42b883 !important;
-}
-
-/* src/styles/landing.css */
-
-/* Hero Section */
-.hero-custom {
-	padding: 6rem 2rem;
-	background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-}
-
-.hero-container {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 4rem;
-	max-width: 1200px;
-	margin: 0 auto;
-	align-items: center;
-}
-
-.hero-content {
-	text-align: left;
-}
-
-.hero-logo {
-	margin-bottom: 2rem;
-}
-
-.hero-title {
-	font-size: 3.5rem;
-	font-weight: 700;
-	line-height: 1.1;
-	margin-bottom: 1.5rem;
-	color: var(--sl-color-text);
-}
-
-.gradient-text {
-	background: linear-gradient(45deg, var(--vue-green), var(--vue-light-green));
+.explore {
+	background: -webkit-linear-gradient(315deg, #42d392 25%, #647eff);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
+	color: transparent;
+	text-align: center;
+}
+/* Custom Directives */
+
+.importanttext {
+	background-color: yellow;
+	color: black;
 }
 
-.hero-description {
-	font-size: 1.25rem;
-	color: var(--sl-color-text-secondary);
-	margin-bottom: 2rem;
-	line-height: 1.6;
+.sl-card {
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	border: 1px solid #e1e8ed;
+	background-color: red;
 }
 
-.hero-actions {
-	display: flex;
-	gap: 1rem;
-	flex-wrap: wrap;
+.sl-card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 12px 24px rgba(66, 184, 131, 0.15);
+	border-color: var(--vue-green);
 }
 
-.btn {
-	padding: 0.75rem 1.5rem;
-	border-radius: 8px;
-	text-decoration: none;
-	font-weight: 600;
-	transition: all 0.2s;
+/* Custom Button Styles */
+.sl-link-button[data-variant="primary"] {
+	background: linear-gradient(135deg, #42b883 0%, #369870 100%);
 	border: none;
-	cursor: pointer;
-	display: inline-block;
+	transition: all 0.3s ease;
 }
-
-.btn-primary {
-	background: var(--vue-green);
-	color: white;
-}
-
-.btn-primary:hover {
-	background: var(--vue-dark-green);
+/* .astro-xwgiixxa{
+  background: linear-gradient(135deg, #42b883 0%, #369870 100%);
+  border: none;
+  transition: all 0.3s ease;
+} */
+.sl-link-astro[data-variant="primary"]:hover {
 	transform: translateY(-2px);
+	box-shadow: 0 8px 16px rgba(66, 184, 131, 0.3);
 }
 
-.btn-secondary {
-	background: transparent;
-	color: var(--vue-green);
-	border: 2px solid var(--vue-green);
+/* Section Spacing */
+.content-section {
+	margin: 6rem 0;
 }
 
-.btn-secondary:hover {
-	background: var(--vue-green);
-	color: white;
-	transform: translateY(-2px);
-}
-
-.hero-code {
-	background: var(--sl-color-bg-nav);
-	border-radius: 12px;
-	padding: 1rem;
-	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-	border: 1px solid var(--sl-color-gray-5);
-}
-
-.btn-outline {
-	background: transparent;
-	color: var(--vue-green);
-	border: 2px solid var(--vue-green);
-	padding: 0.5rem 1rem;
-	border-radius: 6px;
-	text-decoration: none;
-	font-weight: 500;
-	transition: all 0.2s;
-	display: inline-block;
-}
-
-.btn-outline:hover {
-	background: var(--vue-green);
-	color: white;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-	.hero-container {
-		grid-template-columns: 1fr;
-		text-align: center;
+/* Animation for scroll reveal */
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
 	}
-
-	.hero-title {
-		font-size: 2.5rem;
-	}
-
-	.quick-start-grid {
-		grid-template-columns: 1fr;
-	}
-
-	.hero-custom,
-	.features-section,
-	.quick-start-section {
-		padding: 4rem 1rem;
+	to {
+		opacity: 1;
+		transform: translateY(0);
 	}
 }
 
-/* Dark mode support */
-:root[data-theme="dark"] {
-	--vue-green: #4fc08d;
-	--vue-dark-green: #369870;
-	--vue-light-green: #42b883;
+.animate-on-scroll {
+	animation: fadeInUp 0.6s ease forwards;
 }
-
-[data-theme="dark"] .hero-custom {
-	background: linear-gradient(
-		135deg,
-		var(--sl-color-bg) 0%,
-		var(--sl-color-bg-nav) 100%
-	);
-}
-
-[data-theme="dark"] .quick-start-section {
-	background: linear-gradient(
-		135deg,
-		var(--sl-color-bg-nav) 0%,
-		var(--sl-color-bg) 100%
-	);
-}
+/* CARDS COMPONENTS */
