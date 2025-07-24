@@ -200,36 +200,6 @@ a {
 	margin: 0.5rem auto;
 }
 
-/* Responsive breakpoints */
-@media (max-width: 768px) {
-	.image-cards {
-		grid-template-columns: 1fr;
-		gap: 1.5rem;
-		padding: 1.5rem 1rem;
-	}
-
-	.community-card img {
-		height: 250px;
-	}
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-	.image-cards {
-		grid-template-columns: repeat(2, 1fr);
-		gap: 1.75rem;
-	}
-
-	.community-card img {
-		height: 280px;
-	}
-}
-
-@media (min-width: 1025px) {
-	.image-cards {
-		grid-template-columns: repeat(3, 1fr);
-	}
-}
-
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
 	.community-card {
