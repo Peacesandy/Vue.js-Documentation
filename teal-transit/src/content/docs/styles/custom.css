@@ -200,6 +200,78 @@ a {
 	margin: 0.5rem auto;
 }
 
+.brand-cards {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+	justify-content: center;
+	padding: 40px 20px;
+}
+
+.brand-card {
+	width: 120px;
+	height: 80px;
+	background: white;
+	border-radius: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease;
+	cursor: pointer;
+	position: relative;
+	border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.brand-card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.brand-card:nth-child(even) {
+	transform: rotate(-2deg);
+}
+
+.brand-card:nth-child(odd) {
+	transform: rotate(2deg);
+}
+
+.brand-card:hover:nth-child(even),
+.brand-card:hover:nth-child(odd) {
+	transform: translateY(-8px) rotate(0deg);
+}
+
+.logo {
+	width: 40px;
+	height: 40px;
+	object-fit: contain;
+}
+
+/* Text-based logos */
+.text-logo {
+	font-weight: 600;
+	font-size: 14px;
+}
+
+.vue {
+	color: #4fc08d;
+}
+.react {
+	color: #61dafb;
+}
+.angular {
+	color: #dd0031;
+}
+.svelte {
+	color: #ff3e00;
+}
+.next {
+	color: #000;
+}
+.tailwind {
+	color: #06b6d4;
+}
+
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
 	.community-card {
